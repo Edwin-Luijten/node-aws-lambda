@@ -9,18 +9,11 @@ cache:
 
 install_dependencies:
   stage: build
-  script: yarn
+  script: yarn install --production=false
   artifacts:
     paths:
       - node_modules/
-
-analyse:
-  stage: build
-  before_script:
-  - npm config set prefix /usr/local
-  - npm install -g tsc
-  - npm install -g tslint
-  script: yarn analyse
+      - .yarn
 
 build:
   stage: build
@@ -29,3 +22,6 @@ build:
     - npm install -g tsc
     - npm install -g serverless
   script: yarn build
+  artifacts:
+    paths:
+      - .serverless/
