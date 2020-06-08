@@ -12,4 +12,5 @@ Make sure you have below tools installed and configured:
 [AWS CLI](https://aws.amazon.com/cli/)  
 
 ## Usage
-The ```src``` folder contains your code.  
+- run: ```yarn``` to install all dependencies.  
+- The ```src``` folder contains your code.  
