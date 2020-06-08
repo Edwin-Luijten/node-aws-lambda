@@ -19,7 +19,7 @@ build:
   stage: build
   before_script:
     - npm config set prefix /usr/local
-    - npm install -g tsc
+    - npm install -g typescript
     - npm install -g serverless
     - npm install -g tslint
   script: yarn build
