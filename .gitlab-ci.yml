@@ -21,6 +21,7 @@ build:
     - npm config set prefix /usr/local
     - npm install -g tsc
     - npm install -g serverless
+    - npm install -g tslint
   script: yarn build
   artifacts:
     paths:
