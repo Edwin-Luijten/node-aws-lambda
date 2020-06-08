@@ -24,6 +24,15 @@ provider:
   name: aws
   runtime: nodejs12.x
 
+plugins:
+  - serverless-plugin-typescript
+
+package:
+  include:
+    src/**/!(*.spec).js
+  exclude:
+    - node_modules/**/*
+
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
@@ -59,7 +68,7 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: src/handler.helloWorld
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

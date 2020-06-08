@@ -5,22 +5,11 @@
 ```git clone git@gitlab.ironpichi.com:skeleton/aws-lambda-node.git```
 
 ## Uses
-Node 12.x
-Typescript  
-Serverless
-AWS CLI
-
-## Installing Serverless 
-https://www.serverless.com/framework/docs/getting-started/  
-
-**MaxOS/Linux**
-```curl -o- -L https://slss.io/install | bash```  
-
-**Windows**  
-```choco install serverless```  
-
-**NPM**  
-```npm install -g serverless```  
+Make sure you have below tools installed and configured:  
+[Node 12.x](https://nodejs.org/docs/latest-v12.x/api/)  
+[Typescript](https://www.typescriptlang.org/)  
+[Serverless](https://www.serverless.com)  
+[AWS CLI](https://aws.amazon.com/cli/)  
 
 ## Usage
-Run yarn to install the dependencies: ```yarn```
+The ```src``` folder contains your code.  
