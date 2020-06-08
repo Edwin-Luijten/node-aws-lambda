@@ -13,6 +13,7 @@ install_dependencies:
   before_script:
     - npm config set prefix /usr/local
     - npm install -g serverless
+    - npm install -g tslint
   artifacts:
     paths:
       - node_modules/
