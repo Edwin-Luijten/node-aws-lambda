@@ -1,4 +1,9 @@
 {
+  "author": "edwin@mediamonks.com",
+  "licence": "MIT",  
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "analyse": "yarn lint",
     "clean": "rimraf .build .serverless",
