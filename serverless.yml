@@ -23,6 +23,8 @@ service: skeleton
 provider:
   name: aws
   runtime: nodejs12.x
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
 
 plugins:
   - serverless-plugin-typescript
