@@ -21,12 +21,14 @@ service: skeleton
 # frameworkVersion: "=X.X.X"
 
 provider:
+  stage: ${env:STAGE}
   name: aws
   runtime: nodejs12.x
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
 
 plugins:
+  - serverless-dotenv-plugin
   - serverless-plugin-typescript
 
 package:
