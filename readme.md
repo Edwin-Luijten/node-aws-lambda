@@ -21,6 +21,3 @@ Rename .env.dist to .env and set the values.
 stage: ${env:STAGE} // Default is dev
 project: ${env:PROJECT}
 ```
-
-### Obtaining the credentials file
-https://www.serverless.com/framework/docs/providers/google/guide/credentials/
