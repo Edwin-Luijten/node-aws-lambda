@@ -22,12 +22,9 @@ provider:
   runtime: nodejs16.x
   stage: ${opt:stage, 'dev'}
   region: ${env:AWS_DEFAULT_REGION}
-  endpointType: REGIONAL
-  memorySize: 512
   environment:
     ENVIRONMENT: ${env:ENVIRONMENT}
     NODE_ENV: ${env:NODE_ENV}
-
 
 functions:
   ping:
