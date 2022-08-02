@@ -1,4 +1,5 @@
 ## Requirements
+
 - Node 16.x
 
 ## Library
@@ -15,8 +16,6 @@
 -->
 
 <!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -38,53 +37,53 @@
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
-</details>
-
 
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 This is an AWS Lambda boilerplate to get you up and running quickly.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 ### Built With
 
-* [![Node][Node.js]][Node-url]
-* [![Typescript][Typescript]][Typescript-url]
-* [![Serverless Framework][Serverless]][Serverless-url]
+[![Node][Node.js]][Node-url] [![Typescript][Typescript]][Typescript-url] [![Serverless Framework][Serverless]][Serverless-url]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 ### Prerequisites
+
 Make sure you have Node 16 and serverless framework installed:
+
 - https://nodejs.org/en/download/
 - https://www.typescriptlang.org/download
 
 ### Installation
 
 Clone the repository and place it in: source/serverless
+
 * git
   ```sh
   git clone git@bitbucket.org:MonkEdwin/aws-lambda-node.git
   ```
 
 Within source/serverless run:
+
 * npm
   ```sh
   npm install
   ```
 
-
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
 The skeleton come with some handy functionality.
@@ -92,6 +91,7 @@ The skeleton come with some handy functionality.
 ### Response
 
 #### Example
+
 ```typescript
 import HttpStatusCode from '../lib/http/code';
 import Response from '../lib/http//response';
@@ -108,10 +108,13 @@ return response
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Encryption
+
 Required environment variables:
+
 - HEX_ENCRYPTION_KEY
 
 #### Example
+
 ```typescript
 import { encrypt, decrypt } from '../lib/crypto';
 
@@ -123,10 +126,13 @@ const decrypted = decrypt(encrypted);
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Hashing
+
 Required environment variables:
+
 - HASHING_KEY
 
 #### Example
+
 ```typescript
 import { hash, equals } from '../lib/hash';
 
@@ -140,11 +146,17 @@ if (equals(hashed, test)) {
     console.log('not equal');
 }
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align = "right" > (<a href = "#top" > back
+to
+top < /a>)</
+p >
 
 ```
+
 ### S3 Signed Upload Url
+
 Required environment variables:
+
 - AWS_REGION
 - S3_BUCKET
 
@@ -168,7 +180,9 @@ console.log(url);
 ### Media
 
 ### Images
+
 Optional environment variables:
+
 - IMAGICK_PATH (required when using lambda)
 
 #### Example
@@ -197,6 +211,7 @@ try {
 
 
 <!-- ROADMAP -->
+
 ## Roadmap
 
 - [ ] TBD
@@ -206,9 +221,11 @@ try {
 
 
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also
+simply open an issue with the tag "enhancement".
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -221,6 +238,7 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
@@ -229,6 +247,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 <!-- ACKNOWLEDGMENTS -->
+
 ## Acknowledgments
 
 * []()
@@ -240,9 +259,15 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [Node.js]: https://img.shields.io/badge/Node-35495E?style=for-the-badge&logo=node.js&logoColor=4FC08D
+
 [Node-url]: https://nodejs.org
+
 [Typescript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+
 [Typescript-url]: https://www.typescriptlang.org/docs/
+
 [Serverless]: https://img.shields.io/badge/Serverless-35495E?style=for-the-badge&logo=serverless&logoColor=orange
+
 [Serverless-url]: https://www.serverless.com/framework/docs
