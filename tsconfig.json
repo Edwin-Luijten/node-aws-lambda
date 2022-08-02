@@ -1,23 +1,36 @@
 {
   "compilerOptions": {
+    "target": "ES2020",
+    "lib": [
+      "ES2020"
+    ],
+    "skipLibCheck": true,
     "module": "commonjs",
-    "target": "es2019",
-    "lib": ["es2019"],
     "moduleResolution": "node",
-    "rootDir": "./",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "allowUnreachableCode": false,
+    "alwaysStrict": true,
+    "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "allowJs": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noImplicitThis": true,
-    "strictNullChecks": true,
-    "noImplicitReturns": true,
-    "preserveConstEnums": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "incremental": true,
-    "tsBuildInfoFile": "build-info"
+    "baseUrl": "./src",
+    "outDir": ".build",
+    "rootDir": "./",
+    "allowSyntheticDefaultImports": true,
   },
-  "exclude": ["node_modules", "coverage"]
+  "exclude": [
+    "node_modules/**/*"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ]
 }
