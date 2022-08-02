@@ -1,9 +1,4 @@
-## Requirements
-
-- Node 16.x
-
-## Library
-
+# AWS Lambda Skeleton
 <div id="top"></div>
 
 <!-- PROJECT SHIELDS -->
@@ -83,7 +78,7 @@ Within source/serverless run:
 <!-- USAGE EXAMPLES -->
 
 ## <a name="usage"></a> Usage
-
+<div id="usage"></div>
 The skeleton comes with some handy functionality.
 
 <ol>
@@ -116,7 +111,7 @@ return response
     .send();
 ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#usage">back to usage</a>)</p>
 
 ### <a name="encryption"></a> Encryption
 
@@ -134,7 +129,7 @@ const decrypted = decrypt(encrypted);
 
 ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#usage">back to usage</a>)</p>
 
 ### <a name="hashing"></a> Hashing
 
@@ -158,7 +153,7 @@ if (equals(hashed, test)) {
 }
 ```
 
-<p align = "right" > (<a href = "#top" > back to top </a>)</p>
+<p align="right">(<a href="#usage">back to usage</a>)</p>
 
 ### <a name="s3-signed-upload-url"></a> S3 Signed Upload Url
 
@@ -182,7 +177,7 @@ const url = await signedUploadUrl(s3, key, expiration, Size.ONE_MB);
 console.log(url);
 ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#usage">back to usage</a>)</p>
 
 ### <a name="media"></a> Media
 
@@ -214,7 +209,7 @@ try {
 }
 ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#usage">back to usage</a>)</p>
 
 <!-- ROADMAP -->
 
@@ -223,8 +218,6 @@ try {
 - [ ] TBD
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- CONTRIBUTING -->
 
