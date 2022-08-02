@@ -84,7 +84,20 @@ Within source/serverless run:
 
 ## Usage
 
-The skeleton come with some handy functionality.
+The skeleton comes with some handy functionality.
+
+<ol>
+    <li><a href="#response">Response</a></li>
+    <li><a href="#encryption">Encryption</a></li>
+    <li><a href="#hashing">Hashing</a></li>
+    <li><a href="#s3-signed-upload-url">Uploads</a></li>
+    <li>
+      <a href="#media">Media</a>
+      <ul>
+        <li><a href="#images">Images</a></li>
+      </ul>
+    </li>
+  </ol>
 
 ### Response
 
