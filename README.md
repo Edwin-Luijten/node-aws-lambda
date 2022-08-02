@@ -18,7 +18,7 @@
 <!-- TABLE OF CONTENTS -->
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -39,13 +39,13 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
+## <a name="about"></a> About The Project
 
 This is an AWS Lambda boilerplate to get you up and running quickly.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Built With
+### <a name="built-with"></a> Built With
 
 [![Node][Node.js]][Node-url] [![Typescript][Typescript]][Typescript-url] [![Serverless Framework][Serverless]][Serverless-url]
 
@@ -55,16 +55,16 @@ This is an AWS Lambda boilerplate to get you up and running quickly.
 
 <!-- GETTING STARTED -->
 
-## Getting Started
+## <a name="getting-started"></a> Getting Started
 
-### Prerequisites
+### <a name="prerequisites"></a> Prerequisites
 
 Make sure you have Node 16 and serverless framework installed:
 
 - https://nodejs.org/en/download/
 - https://www.typescriptlang.org/download
 
-### Installation
+### <a name="installation"></a> Installation
 
 Clone the repository and place it in: source/serverless
 
@@ -82,7 +82,7 @@ Within source/serverless run:
 
 <!-- USAGE EXAMPLES -->
 
-## Usage
+## <a name="usage"></a> Usage
 
 The skeleton comes with some handy functionality.
 
@@ -118,7 +118,7 @@ return response
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Encryption
+### <a name="encryption"></a> Encryption
 
 Required environment variables:
 
@@ -136,7 +136,7 @@ const decrypted = decrypt(encrypted);
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Hashing
+### <a name="hashing"></a> Hashing
 
 Required environment variables:
 
@@ -156,15 +156,11 @@ if (equals(hashed, test)) {
 } else {
     console.log('not equal');
 }
-
-<p align = "right" > (<a href = "#top" > back
-to
-top < /a>)</
-p >
-
 ```
 
-### S3 Signed Upload Url
+<p align = "right" > (<a href = "#top" > back to top </a>)</p>
+
+### <a name="s3-signed-upload-url"></a> S3 Signed Upload Url
 
 Required environment variables:
 
@@ -188,9 +184,9 @@ console.log(url);
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Media
+### <a name="media"></a> Media
 
-### Images
+### <a name="images"></a> Images
 
 Optional environment variables:
 
@@ -220,10 +216,9 @@ try {
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 <!-- ROADMAP -->
 
-## Roadmap
+## <a name="roadmap"></a> Roadmap
 
 - [ ] TBD
 
@@ -233,7 +228,7 @@ try {
 
 <!-- CONTRIBUTING -->
 
-## Contributing
+## <a name="contributing"></a> Contributing
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also
 simply open an issue with the tag "enhancement".
@@ -250,7 +245,7 @@ simply open an issue with the tag "enhancement".
 
 <!-- LICENSE -->
 
-## License
+## <a name="licence"></a> License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
@@ -259,7 +254,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- ACKNOWLEDGMENTS -->
 
-## Acknowledgments
+## <a name="acknowledgements"></a> Acknowledgements
 
 * []()
 * []()
