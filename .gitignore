@@ -1,3 +1,6 @@
 .idea
+.serverless
+.webpack
+.env
 node_modules
 package-lock.json

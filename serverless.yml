@@ -16,6 +16,10 @@ custom:
     path: /
     resources:
       - /api
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    includeModules: true
+    keepOutputDirectory: true
 
 provider:
   name: aws
