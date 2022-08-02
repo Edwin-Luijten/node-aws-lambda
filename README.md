@@ -99,7 +99,7 @@ The skeleton comes with some handy functionality.
     </li>
   </ol>
 
-### Response
+### <a name="response"></a> Response
 
 #### Example
 
