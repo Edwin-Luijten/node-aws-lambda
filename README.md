@@ -65,7 +65,7 @@ Make sure you have Node 16 and serverless framework installed:
 Clone the repository:
 
 ```sh
-  git clone git@github.com:Edwin-Luijten/node-aws-lambda.git .
+git clone git@github.com:Edwin-Luijten/node-aws-lambda.git .
 ```
 
 Install dependencies:
