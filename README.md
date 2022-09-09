@@ -82,12 +82,22 @@ Within source/serverless run:
 The skeleton comes with some handy functionality.
 
 <ol>
+    <li><a href="#tests">Tests</a></li>
     <li><a href="#response">Response</a></li>
     <li><a href="#validation">Validation Errors</a></li>
     <li><a href="#encryption">Encryption</a></li>
     <li><a href="#hashing">Hashing</a></li>
     <li><a href="#s3-signed-upload-url">Uploads</a></li>
 </ol>
+
+### <a name="tests"></a> Tests
+This skeleton comes with [Jest](https://jestjs.io/). And includes tests covering the lib folder.  
+Run them by executing:  
+```shell
+npm run test
+```
+
+<p align="right">(<a href="#usage">back to usage</a>)</p>
 
 ### <a name="response"></a> Response
 
