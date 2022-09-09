@@ -1,4 +1,5 @@
 # AWS Lambda Skeleton
+
 <div id="top"></div>
 
 <!-- PROJECT SHIELDS -->
@@ -78,21 +79,17 @@ Within source/serverless run:
 <!-- USAGE EXAMPLES -->
 
 ## <a name="usage"></a> Usage
+
 <div id="usage"></div>
 The skeleton comes with some handy functionality.
 
 <ol>
     <li><a href="#response">Response</a></li>
+    <li><a href="#validation">Validation Errors</a></li>
     <li><a href="#encryption">Encryption</a></li>
     <li><a href="#hashing">Hashing</a></li>
     <li><a href="#s3-signed-upload-url">Uploads</a></li>
-    <li>
-      <a href="#media">Media</a>
-      <ul>
-        <li><a href="#images">Images</a></li>
-      </ul>
-    </li>
-  </ol>
+</ol>
 
 ### <a name="response"></a> Response
 
@@ -109,6 +106,51 @@ return response
     .with({foo: 'bar'}) // Will be wrapped in a data attribute: { data: { foo: 'bar' } }
     .addHeader('Cache-Control', 'public, max-age=300')
     .send();
+```
+
+<p align="right">(<a href="#usage">back to usage</a>)</p>
+
+### <a name="validation"></a> Validation Errors
+
+Uses [JOI](https://joi.dev/).
+[Media.Monks validation errors spec](https://github.com/mediamonks/documents/blob/master/rest-api-specification.md#223-validation-error).
+
+#### Example
+
+```typescript
+import HttpStatusCode from './code';
+import { transformErrors } from './validation';
+
+const {error, value} = Rules.eventRegistration.validate({
+    title: input.name,
+    name: input.name,
+    surname: input.name,
+    email: input.email,
+    city: input.city,
+}) as { error: ValidationError, value: EventRegistration };
+
+if (error) {
+    // The response utility will transform the Joi.ValidationError according to our specs.
+    return response.code(HttpStatusCode.BAD_REQUEST).with(error).send();
+    // Otherwise you can use `transformError(error)`
+    const errors = transformErrors(error);
+}
+```
+Example Response:
+```json
+{
+    "error": {
+        "code": "error.form.validation",
+        "message": "Not all fields are filled correctly.",
+        "fields": [
+            {
+                "field": "email",
+                "code": "error.string.email",
+                "message": "\"email\" must be a valid email"
+            }
+        ]
+    }
+}
 ```
 
 <p align="right">(<a href="#usage">back to usage</a>)</p>
@@ -179,43 +221,12 @@ console.log(url);
 
 <p align="right">(<a href="#usage">back to usage</a>)</p>
 
-### <a name="media"></a> Media
-
-### <a name="images"></a> Images
-
-Optional environment variables:
-
-- IMAGICK_PATH (required when using lambda)
-
-#### Example
-
-```typescript
-import { imageProbe } from '../lib/media/image';
-
-// ImageInfo:
-// {
-//    size: 184817, // bytes
-//    format: 'PNG',
-//    extension: 'png',
-//    width: 344, // pixels
-//    height: 294, // pixels
-// }
-
-try {
-    const info = await imageProbe('path to image.jpg');
-    console.log(info);
-} catch (e) {
-    console.error('invalid image');
-}
-```
-
-<p align="right">(<a href="#usage">back to usage</a>)</p>
-
 <!-- ROADMAP -->
 
 ## <a name="roadmap"></a> Roadmap
 
-- [ ] TBD
+- [x] Transform JOI validation errors to
+  Media.Monks [spec](https://github.com/mediamonks/documents/blob/master/rest-api-specification.md#223-validation-error)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

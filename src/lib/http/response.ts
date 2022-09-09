@@ -1,18 +1,20 @@
 import { APIGatewayProxyResult } from 'aws-lambda';
 import HttpStatusCode from './code';
+import { ValidationError } from 'joi';
+import { transformErrors } from './validation';
 
 export default class Response {
     private data: string | number | Object;
     private statusCode: number;
-    private readonly cache: number | undefined;
+    private readonly cacheDuration: number | undefined;
     private headers: {
         [header: string]: boolean | number | string;
     } = {};
 
-    constructor(data?: string | number | Object, code?: number, cache?: number) {
+    constructor(data?: string | number | Object, code?: number, cacheDuration?: number) {
         this.data = data ?? {};
         this.statusCode = code ?? HttpStatusCode.OK;
-        this.cache = cache;
+        this.cacheDuration = cacheDuration;
     }
 
     with(data: string | number | Object): Response {
@@ -34,13 +36,20 @@ export default class Response {
     }
 
     send(): APIGatewayProxyResult {
+        let data: any = {data: this.data};
+
+        if (this.data instanceof ValidationError) {
+            this.statusCode = HttpStatusCode.BAD_REQUEST;
+            data = transformErrors(this.data);
+        }
+
         const response = {
             statusCode: this.statusCode,
             headers: this.headers,
-            body: JSON.stringify({data: this.data}),
+            body: JSON.stringify(data),
         };
 
-        if (this.cache) response.headers['Cache-Control'] = `public, max-age=${this.cache}`;
+        if (this.cacheDuration && this.cacheDuration > 0) response.headers['Cache-Control'] = `public, max-age=${this.cacheDuration}`;
 
         return response;
     }
