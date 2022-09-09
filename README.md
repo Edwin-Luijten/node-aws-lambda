@@ -62,12 +62,17 @@ Make sure you have Node 16 and serverless framework installed:
 
 ### <a name="installation"></a> Installation
 
-Clone the repository and place it in: source/serverless
+Clone the repository:
 
-  ```sh
-  git clone git@github.com:Edwin-Luijten/node-aws-lambda.git \
-  npm install
-  ```
+```sh
+  git clone git@github.com:Edwin-Luijten/node-aws-lambda.git .
+```
+
+Install dependencies:
+
+```shell
+npm install
+```
 
 <!-- USAGE EXAMPLES -->
 
@@ -86,12 +91,15 @@ The skeleton comes with some handy functionality.
 </ol>
 
 ### <a name="tests"></a> Tests
+
 This skeleton comes with [Jest](https://jestjs.io/). And includes tests covering the lib folder.  
-Run them by executing:  
+Run them by executing:
+
 ```shell
 npm run test
 ```
-_(by default it generates coverage in ./coverage, the html page can be found in: ./coverage/Icov-report)_  
+
+_(by default it generates coverage in ./coverage, the html page can be found in: ./coverage/Icov-report)_
 <p align="right">(<a href="#usage">back to usage</a>)</p>
 
 ### <a name="response"></a> Response
@@ -113,10 +121,10 @@ return response
 
 // Setting cache duration `cache(duration)`
 return response
-        .status(HttpStatusCode.OK)
-        .with({foo: 'bar'}) // Will be wrapped in a data attribute: { data: { foo: 'bar' } }
-        .cache(300)
-        .send();
+    .status(HttpStatusCode.OK)
+    .with({foo: 'bar'}) // Will be wrapped in a data attribute: { data: { foo: 'bar' } }
+    .cache(300)
+    .send();
 ```
 
 <p align="right">(<a href="#usage">back to usage</a>)</p>
@@ -124,7 +132,8 @@ return response
 ### <a name="validation"></a> Validation Errors
 
 Uses [JOI](https://joi.dev/).  
-[Media.Monks validation errors spec](https://github.com/mediamonks/documents/blob/master/rest-api-specification.md#223-validation-error).
+[Media.Monks validation errors spec](https://github.com/mediamonks/documents/blob/master/rest-api-specification.md#223-validation-error)
+.
 
 #### Example
 
@@ -147,20 +156,22 @@ if (error) {
     const errors = transformErrors(error);
 }
 ```
+
 Example Response:
+
 ```json
 {
-    "error": {
-        "code": "error.form.validation",
-        "message": "Not all fields are filled correctly.",
-        "fields": [
-            {
-                "field": "email",
-                "code": "error.string.email",
-                "message": "\"email\" must be a valid email"
-            }
-        ]
-    }
+  "error": {
+    "code": "error.form.validation",
+    "message": "Not all fields are filled correctly.",
+    "fields": [
+      {
+        "field": "email",
+        "code": "error.string.email",
+        "message": "\"email\" must be a valid email"
+      }
+    ]
+  }
 }
 ```
 
@@ -270,9 +281,11 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [//]: # (<!-- ACKNOWLEDGMENTS -->)
 
 [//]: # ()
+
 [//]: # (## <a name="acknowledgements"></a> Acknowledgements)
 
 [//]: # ()
+
 [//]: # (* []&#40;&#41;)
 
 [//]: # (* []&#40;&#41;)
@@ -298,7 +311,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [Serverless-url]: https://www.serverless.com/framework/docs
 
 [JEST]: https://img.shields.io/badge/Jest-FF0000?style=for-the-badge&logo=jest&logoColor=white
+
 [JEST-url]: https://jestjs.io/
 
 [ESLINT]: https://img.shields.io/badge/Eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white
+
 [ESLINT-url]: https://eslint.org/
