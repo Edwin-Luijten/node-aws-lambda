@@ -112,7 +112,7 @@ return response
 
 ### <a name="validation"></a> Validation Errors
 
-Uses [JOI](https://joi.dev/).
+Uses [JOI](https://joi.dev/).  
 [Media.Monks validation errors spec](https://github.com/mediamonks/documents/blob/master/rest-api-specification.md#223-validation-error).
 
 #### Example
