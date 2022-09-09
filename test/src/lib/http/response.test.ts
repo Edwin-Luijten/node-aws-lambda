@@ -15,6 +15,7 @@ describe('Response Lib Test', () => {
 
         const response = new Response();
         const payload = response.with({foo: 'bar'})
+            .code(HttpStatusCode.OK)
             .cache(500)
             .addHeader('Content-Type', 'application/json')
             .send();

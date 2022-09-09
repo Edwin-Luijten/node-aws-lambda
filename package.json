@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "AWS Lambda boilerplate",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "author": "edwin@mediamonks.com",
   "license": "ISC",

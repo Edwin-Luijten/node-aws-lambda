@@ -4,7 +4,7 @@ const AES_METHOD = 'aes-256-cbc';
 const IV_LENGTH = 16;
 
 export function encrypt(data: string): string {
-    if (!process.env.HEX_ENCRYPTION_KEY) throw new Error('Missing environment variable: HEX_ENCRYPTION_KEY');
+    if (!process.env.HEX_ENCRYPTION_KEY || process.env.HEX_ENCRYPTION_KEY.length === 0) throw new Error('Missing environment variable: HEX_ENCRYPTION_KEY');
     if (process.versions.openssl <= '1.0.1f') {
         throw new Error('OpenSSL Version too old, vulnerability to Heartbleed');
     }
@@ -19,11 +19,14 @@ export function encrypt(data: string): string {
 }
 
 export function decrypt(data: string): string {
-    if (!process.env.HEX_ENCRYPTION_KEY) throw new Error('Missing environment variable: HEX_ENCRYPTION_KEY');
+    if (!process.env.HEX_ENCRYPTION_KEY || process.env.HEX_ENCRYPTION_KEY.length === 0) throw new Error('Missing environment variable: HEX_ENCRYPTION_KEY');
 
     const textParts = data.split(':');
+    const firstPart = textParts.shift();
 
-    const iv = Buffer.from(textParts.shift() ?? '', 'hex');
+    if (!firstPart) throw Error('Malformed payload');
+
+    const iv = Buffer.from(firstPart, 'hex');
     const encryptedText = Buffer.from(textParts.join(':'), 'hex');
     const decipher = createDecipheriv('aes-256-cbc', Buffer.from(process.env.HEX_ENCRYPTION_KEY), iv);
 
