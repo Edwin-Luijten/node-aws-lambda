@@ -23,7 +23,7 @@ export function decrypt(data: string): string {
 
     const textParts = data.split(':');
 
-    const iv = Buffer.from(textParts.shift(), 'hex');
+    const iv = Buffer.from(textParts.shift() ?? '', 'hex');
     const encryptedText = Buffer.from(textParts.join(':'), 'hex');
     const decipher = createDecipheriv('aes-256-cbc', Buffer.from(process.env.HEX_ENCRYPTION_KEY), iv);
 
