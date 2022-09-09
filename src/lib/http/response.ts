@@ -6,7 +6,7 @@ import { transformErrors } from './validation';
 export default class Response {
     private data: string | number | Object;
     private statusCode: number;
-    private readonly cacheDuration: number | undefined;
+    private cacheDuration: number | undefined;
     private headers: {
         [header: string]: boolean | number | string;
     } = {};
@@ -31,6 +31,12 @@ export default class Response {
 
     addHeader(key: string, value: boolean | number | string): Response {
         this.headers[key] = value;
+
+        return this;
+    }
+
+    cache(duration: number): Response {
+        this.cacheDuration = duration;
 
         return this;
     }
