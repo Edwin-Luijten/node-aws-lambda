@@ -64,14 +64,12 @@ Make sure you have Node 16 and serverless framework installed:
 
 Clone the repository and place it in: source/serverless
 
-* git
   ```sh
   git clone git@bitbucket.org:MonkEdwin/aws-lambda-node.git
   ```
 
 Within source/serverless run:
 
-* npm
   ```sh
   npm install
   ```
