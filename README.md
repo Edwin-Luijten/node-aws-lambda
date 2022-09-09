@@ -272,15 +272,19 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-<!-- ACKNOWLEDGMENTS -->
+[//]: # (<!-- ACKNOWLEDGMENTS -->)
 
-## <a name="acknowledgements"></a> Acknowledgements
+[//]: # ()
+[//]: # (## <a name="acknowledgements"></a> Acknowledgements)
 
-* []()
-* []()
-* []()
+[//]: # ()
+[//]: # (* []&#40;&#41;)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+[//]: # (* []&#40;&#41;)
+
+[//]: # (* []&#40;&#41;)
+
+[//]: # (<p align="right">&#40;<a href="#top">back to top</a>&#41;</p>)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
