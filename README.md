@@ -43,7 +43,7 @@ This is an AWS Lambda boilerplate to get you up and running quickly.
 
 ### <a name="built-with"></a> Built With
 
-[![Node][Node.js]][Node-url] [![Typescript][Typescript]][Typescript-url] [![Serverless Framework][Serverless]][Serverless-url]
+[![Node][Node.js]][Node-url] [![Typescript][Typescript]][Typescript-url] [![JEST][Jest]][JEST-url] [![ESLINT][Eslint]][ESLINT-url] [![Serverless Framework][Serverless]][Serverless-url]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -301,3 +301,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [Serverless]: https://img.shields.io/badge/Serverless-35495E?style=for-the-badge&logo=serverless&logoColor=orange
 
 [Serverless-url]: https://www.serverless.com/framework/docs
+
+[JEST]: https://img.shields.io/badge/Jest-FF0000?style=for-the-badge&logo=jest&logoColor=white
+[JEST-url]: https://jestjs.io/
+
+[ESLINT]: https://img.shields.io/badge/Eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white
+[ESLINT-url]: https://eslint.org/
