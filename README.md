@@ -92,7 +92,7 @@ The skeleton comes with some handy functionality.
 
 ### <a name="tests"></a> Tests
 This skeleton comes with [Jest](https://jestjs.io/). And includes tests covering the lib folder.  
-Run them by executing:  
+Run them by executing _(by default it generates coverage in ./coverage, the html page can be found in: ./coverage/Icov-report)_:  
 ```shell
 npm run test
 ```
