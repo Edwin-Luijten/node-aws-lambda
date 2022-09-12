@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "description": "AWS Lambda boilerplate",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage --silent false",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --fix"
   },
-  "author": "edwin@mediamonks.com",
+  "authors": [
+    {
+      "name": "Edwin Luijten",
+      "email": "edwin@mediamonks.com"
+    }
+  ],
   "license": "ISC",
   "devDependencies": {
     "@types/aws-lambda": "^8.10.93",

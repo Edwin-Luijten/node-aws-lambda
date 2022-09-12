@@ -83,8 +83,13 @@ The skeleton comes with some handy functionality.
 
 <ol>
     <li><a href="#tests">Tests</a></li>
-    <li><a href="#response">Response</a></li>
-    <li><a href="#validation">Validation Errors</a></li>
+    <li>HTTP
+      <ol>
+          <li><a href="#middleware">Middlewares</a></li>
+          <li><a href="#response">Response</a></li>
+          <li><a href="#validation">Validation Errors</a></li>
+      </ol>
+    </li>
     <li><a href="#encryption">Encryption</a></li>
     <li><a href="#hashing">Hashing</a></li>
     <li><a href="#s3-signed-upload-url">Uploads</a></li>
@@ -100,6 +105,54 @@ npm run test
 ```
 
 _(by default it generates coverage in ./coverage, the html page can be found in: ./coverage/Icov-report)_
+<p align="right">(<a href="#usage">back to usage</a>)</p>
+
+### Middleware
+
+#### Error
+The error middleware will catch the uncaught error and transforms it to a readable response.  
+The Bad request error code will not be handled, all >= 500 errors will be returned as internal server errors.  
+    
+When an error has a code (statusCode, code or response.status(Axios) property) it will use that code and message.
+##### Examples
+
+##### General Errors
+```typescript
+import HttpStatusCode from '../lib/http/code';
+import Response from '../lib/http//response';
+
+export const ping: APIGatewayProxyHandler = errorHandler()(async (event: APIGatewayProxyEvent, context) => {
+    throw new Error('Oops');
+    
+    return (new Response('pong')).send();
+});
+```
+Example Response:  
+```json
+{
+    "code": 500,
+    "message": "Internal server error"
+}
+```
+
+##### Errors with a `statusCode, code or response.status` property
+```typescript
+import HttpStatusCode from '../lib/http/code';
+import Response from '../lib/http/response';
+
+export const ping: APIGatewayProxyHandler = errorHandler()(async (event: APIGatewayProxyEvent, context) => {
+    await axios.get('invalid-url');
+    // Axios has response.status in it's error.
+    // Example Response:
+    //{
+    //    "code": 404,
+    //    "message": "Page not found"
+    //}
+
+    return (new Response('pong')).send();
+});
+```
+
 <p align="right">(<a href="#usage">back to usage</a>)</p>
 
 ### <a name="response"></a> Response
@@ -131,9 +184,7 @@ return response
 
 ### <a name="validation"></a> Validation Errors
 
-Uses [JOI](https://joi.dev/).  
-[Media.Monks validation errors spec](https://github.com/mediamonks/documents/blob/master/rest-api-specification.md#223-validation-error)
-.
+Uses [JOI](https://joi.dev/).
 
 #### Example
 
@@ -150,7 +201,7 @@ const {error, value} = Rules.eventRegistration.validate({
 }) as { error: ValidationError, value: EventRegistration };
 
 if (error) {
-    // The response utility will transform the Joi.ValidationError according to our specs.
+    // The response utility will transform the Joi.ValidationError.
     return response.code(HttpStatusCode.BAD_REQUEST).with(error).send();
     // Otherwise you can use `transformError(error)`
     const errors = transformErrors(error);
