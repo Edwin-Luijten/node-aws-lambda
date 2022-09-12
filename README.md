@@ -107,7 +107,7 @@ npm run test
 _(by default it generates coverage in ./coverage, the html page can be found in: ./coverage/Icov-report)_
 <p align="right">(<a href="#usage">back to usage</a>)</p>
 
-### Middleware
+### <a name="middleware"></a> Middleware
 
 #### Error
 The error middleware will catch the uncaught error and transforms it to a readable response.  

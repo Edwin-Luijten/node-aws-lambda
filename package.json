@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "AWS Lambda boilerplate",
   "scripts": {
-    "test": "jest --coverage --silent false",
+    "test": "jest --coverage",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --fix"
   },
