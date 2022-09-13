@@ -243,7 +243,7 @@ export const ping: APIGatewayProxyHandler = validationErrorHandler()(async (even
 
 <p align="right">(<a href="#usage">back to usage</a>)</p>
 
-### <a name="middleware-compose"></a>Composing Middlewares
+### <a name="middleware-composing"></a>Composing Middlewares
 
 Using multiple middleware is easy with the `composeHandler`.  
 
