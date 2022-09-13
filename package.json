@@ -4,6 +4,7 @@
   "description": "AWS Lambda boilerplate",
   "scripts": {
     "test": "jest --coverage",
+    "test-verbose": "jest --coverage --silent=false --verbose=false",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "lint-fix": "eslint \"**/*.{ts,tsx}\" --fix"
   },

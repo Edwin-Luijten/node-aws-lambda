@@ -84,11 +84,18 @@ The skeleton comes with some handy functionality.
 <ol>
     <li><a href="#tests">Tests</a></li>
     <li>HTTP
-      <ol>
-          <li><a href="#middleware">Middlewares</a></li>
+      <ul>
+          <li><a href="#middleware">Middlewares</a>
+            <ul>
+              <li><a href="#middleware-error">Error middleware</a></li>
+              <li><a href="#middleware-validation-error">Validation Error middleware</a></li>
+              <li><a href="#middleware-response">Response middleware</a></li>
+              <li><a href="#middleware-composing">Composing middlewares</a></li>
+            </ul>
+          </li>
           <li><a href="#response">Response</a></li>
           <li><a href="#validation">Validation Errors</a></li>
-      </ol>
+      </ul>
     </li>
     <li><a href="#encryption">Encryption</a></li>
     <li><a href="#hashing">Hashing</a></li>
@@ -107,52 +114,171 @@ npm run test
 _(by default it generates coverage in ./coverage, the html page can be found in: ./coverage/Icov-report)_
 <p align="right">(<a href="#usage">back to usage</a>)</p>
 
-### <a name="middleware"></a> Middleware
+## <a name="middleware"></a> Middlewares
 
-#### Error
-The error middleware will catch the uncaught error and transforms it to a readable response.  
-The Bad request error code will not be handled, all >= 500 errors will be returned as internal server errors.  
-    
-When an error has a code (statusCode, code or response.status(Axios) property) it will use that code and message.
-##### Examples
+### <a name="middleware-error"></a>Error Middleware
 
-##### General Errors
+The error middleware will catch the uncaught error and transforms it to a readable response.
+
+#### Example
+
 ```typescript
 import HttpStatusCode from '../lib/http/code';
 import Response from '../lib/http//response';
+import { errorHandler } from './error-middleware';
 
 export const ping: APIGatewayProxyHandler = errorHandler()(async (event: APIGatewayProxyEvent, context) => {
     throw new Error('Oops');
-    
+
     return (new Response('pong')).send();
 });
 ```
-Example Response:  
+
+Example Response:
+
 ```json
 {
-    "code": 500,
-    "message": "Internal server error"
+  "code": 500,
+  "message": "Internal server error"
 }
 ```
 
-##### Errors with a `statusCode, code or response.status` property
+<p align="right">(<a href="#usage">back to usage</a>)</p>
+
+### <a name="middleware-validation-error"></a>Validation Error Middleware
+
+The validation error middleware will catch the ValidationError from joi and transforms it to a better format.
+
+#### Example
+
 ```typescript
 import HttpStatusCode from '../lib/http/code';
-import Response from '../lib/http/response';
+import Response from '../lib/http//response';
+import { validationErrorHandler } from './validation-error-middleware';
 
-export const ping: APIGatewayProxyHandler = errorHandler()(async (event: APIGatewayProxyEvent, context) => {
-    await axios.get('invalid-url');
-    // Axios has response.status in it's error.
-    // Example Response:
-    //{
-    //    "code": 404,
-    //    "message": "Page not found"
-    //}
+export const ping: APIGatewayProxyHandler = validationErrorHandler()(async (event: APIGatewayProxyEvent, context) => {
+    const {error} = Joi.object({
+        email: Joi.string().email(),
+    }).validate({
+        email: 'foo',
+    });
+
+    if (error) throw error;
 
     return (new Response('pong')).send();
 });
 ```
 
+Example Response:
+
+```json
+// HTTP Status code: 400
+{
+  "error": {
+    "code": "error.form.validation",
+    "message": "Not all fields are filled correctly.",
+    "fields": [
+      {
+        "field": "email",
+        "code": "error.string.email",
+        "message": "\"email\" must be a valid email"
+      }
+    ]
+  }
+}
+```
+
+<p align="right">(<a href="#usage">back to usage</a>)</p>
+
+### <a name="middleware-response"></a>Response Middleware
+
+The response middleware makes sure a valid json response will be returned.
+
+#### Example
+
+```typescript
+import HttpStatusCode from '../lib/http/code';
+import Response from '../lib/http//response';
+import { responseHandler } from './response-middleware';
+
+export const ping: APIGatewayProxyHandler = validationErrorHandler()(async (event: APIGatewayProxyEvent, context) => {
+    // The middleware will call .build upon return
+    return new Response('pong');
+
+    // ApiGatewayProxyResult will just be retured
+    return {
+        statusCode: HttpStatusCode.OK,
+        headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+        },
+        body: JSON.stringify({data: {foo: 'bar'}}),
+    }
+
+    // Any other object will be transformed to a valid ApiGatewayProxyResult
+    //{
+    //      statusCode: HttpStatusCode.OK, 
+    //      headers: {
+    //          'Content-Type': 'application/json',
+    //          'Cache-Control': 'no-cache, no-store, must-revalidate',
+    //      },
+    //      body: '{"data": {"foo": "bar"}}',
+    //}
+    return {
+        foo: 'bar'
+    }
+
+    // A simple return or undefined results in a no content response
+    //{
+    //      statusCode: HttpStatusCode.NO_CONTENT, 
+    //      headers: {
+    //          'Content-Type': 'application/json',
+    //          'Cache-Control': 'no-cache, no-store, must-revalidate',
+    //      },
+    //      body: '',
+    //}
+    return
+});
+```
+
+<p align="right">(<a href="#usage">back to usage</a>)</p>
+
+### <a name="middleware-compose"></a>Composing Middlewares
+
+Using multiple middleware is easy with the `composeHandler`.  
+
+#### Example
+
+```typescript
+import HttpStatusCode from '../lib/http/code';
+import Response from '../lib/http//response';
+import { composeHandler } from './compose';
+import { errorHandler } from './error-middleware';
+import { validationErrorHandler } from './validation-error-middleware';
+import { responseHandler } from './response-middleware';
+import { APIGatewayProxyResult, APIGatewayProxyEvent, Context } from 'aws-lambda';
+
+export const ping: APIGatewayProxyHandler = composeHandler(
+        errorHandler(),
+        validationErrorHandler(),
+        responseHandler(),
+        // Your handler
+        (event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> => (new Response(HttpStatusCode.OK, {pong: 'ok'}))
+);
+```
+
+The outermost handler will be called before the handler starts, and the last when the handler is done or throws an error.  
+A middleware that transforms the incoming request will be called from top to bottom, and a middleware that transforms the output,  
+will be called from the bottom to the top.
+```
+errorHandler
+  validationErrorHandler
+    responseHandler
+      [ your handler ]
+    responseHandler
+  validationErrorHandler
+errorHandler
+```
 <p align="right">(<a href="#usage">back to usage</a>)</p>
 
 ### <a name="response"></a> Response

@@ -1,8 +1,10 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context, } from 'aws-lambda';
 import { PromiseHandler } from './promise-handler';
 import HttpStatusCode from '../code';
+import { ValidationError } from 'joi';
+import { transformErrors } from '../validation';
 
-export const errorHandler = () => (
+export const validationErrorHandler = () => (
     handler: PromiseHandler<APIGatewayProxyEvent, APIGatewayProxyResult>
 ): PromiseHandler<APIGatewayProxyEvent, APIGatewayProxyResult> => async (
     event: APIGatewayProxyEvent,
@@ -11,17 +13,16 @@ export const errorHandler = () => (
     try {
         return await handler(event, context);
     } catch (e: any) {
-        console.error(JSON.stringify(e));
+        if (e instanceof ValidationError) {
+            return {
+                body: JSON.stringify(transformErrors(e)),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                statusCode: HttpStatusCode.BAD_REQUEST
+            };
+        }
 
-        return {
-            body: JSON.stringify({
-                message: 'Internal server error',
-                code: HttpStatusCode.INTERNAL_SERVER_ERROR,
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            statusCode: HttpStatusCode.INTERNAL_SERVER_ERROR,
-        };
+        throw e;
     }
 };
