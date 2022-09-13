@@ -203,7 +203,7 @@ import { responseHandler } from './response-middleware';
 
 export const ping: APIGatewayProxyHandler = validationErrorHandler()(async (event: APIGatewayProxyEvent, context) => {
     // The middleware will call .build upon return
-    return new Response('pong');
+    return new Response(HttpStatusCode.OK, 'pong');
 
     // ApiGatewayProxyResult will just be retured
     return {
@@ -268,8 +268,7 @@ export const ping: APIGatewayProxyHandler = composeHandler(
 ```
 
 The outermost handler will be called before the handler starts, and the last when the handler is done or throws an error.  
-A middleware that transforms the incoming request will be called from top to bottom, and a middleware that transforms the output,  
-will be called from the bottom to the top.
+A middleware that transforms the incoming request will be called from top to bottom, and a middleware that transforms the output will be called from the bottom to the top.
 ```
 errorHandler
   validationErrorHandler
