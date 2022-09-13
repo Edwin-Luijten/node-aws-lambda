@@ -9,7 +9,7 @@ export type JsonLikePrimitive = string | number | boolean | JsonLikePrimitive | 
 export type JsonLike = { [key: string]: JsonLikePrimitive } | JsonLike[];
 
 export const responseHandler = () => (
-    handler: PromiseHandler<APIGatewayProxyEvent, Response | APIGatewayProxyResult | JsonLike | undefined>
+    handler: PromiseHandler<APIGatewayProxyEvent, Response | APIGatewayProxyResult | JsonLike | string | number | undefined>
 ) => async (
     event: APIGatewayProxyEvent,
     context: Context
@@ -31,13 +31,13 @@ export const responseHandler = () => (
     }
 
     // if the response is already of type APIGatewayProxyResult
-    if ('body' in response && response.body && 'statusCode' in response && response.statusCode) {
+    if (typeof response === 'object' && 'body' in response && response.body && 'statusCode' in response && response.statusCode) {
         return response as APIGatewayProxyResult;
     }
 
     let content = response;
     // prevent double data property
-    if ('data' in response && response.data) {
+    if (typeof response === 'object' && 'data' in response && response.data) {
         content = response.data;
     }
 

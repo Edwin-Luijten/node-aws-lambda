@@ -4,9 +4,10 @@ import Response from '../lib/http/response';
 import { errorHandler } from '../lib/http/middleware/error-middleware';
 import { composeHandler } from '../lib/http/middleware/compose';
 import { responseHandler } from '../lib/http/middleware/response-middleware';
+import HttpStatusCode from '../lib/http/code';
 
 export const ping: APIGatewayProxyHandler = composeHandler(
     errorHandler(),
     responseHandler(),
-    async (event: APIGatewayProxyEvent, context) => (new Response('pong')),
+    async (event: APIGatewayProxyEvent, context) => (new Response(HttpStatusCode.OK, 'pong')),
 );
