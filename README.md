@@ -290,19 +290,22 @@ import Response from '../lib/http//response';
 
 const response = new Response();
 
-// Adding headers `addHeader(name, value)`
+// Adding headers `header(name, value)`
 return response
     .status(HttpStatusCode.OK)
     .with({foo: 'bar'}) // Will be wrapped in a data attribute: { data: { foo: 'bar' } }
-    .addHeader('Cache-Control', 'public, max-age=300')
-    .send();
+    .header('Cache-Control', 'public, max-age=300')
+    .build();
 
 // Setting cache duration `cache(duration)`
 return response
     .status(HttpStatusCode.OK)
     .with({foo: 'bar'}) // Will be wrapped in a data attribute: { data: { foo: 'bar' } }
-    .cache(300)
-    .send();
+    .cache(300) // adding false will make it a private cache
+    .build();
+
+// Using the constructor only
+return new Response(HttpStatusCode.OK, {foo: 'bar'}, 500).build();
 ```
 
 <p align="right">(<a href="#usage">back to usage</a>)</p>
