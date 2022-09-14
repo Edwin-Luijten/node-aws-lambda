@@ -119,7 +119,7 @@ _(by default it generates coverage in ./coverage, the html page can be found in:
 ### <a name="middleware-error"></a>Error Middleware
 
 The error middleware will catch the uncaught error and transforms it to a readable response.  
-In order to log the error it makes use of [@aws-lambda-powertools/logger](https://awslabs.github.io/aws-lambda-powertools-typescript/latest/core/logger/)
+In order to log (optional argument) the error it makes use of [@aws-lambda-powertools/logger](https://awslabs.github.io/aws-lambda-powertools-typescript/latest/core/logger/)
 
 #### Example
 
