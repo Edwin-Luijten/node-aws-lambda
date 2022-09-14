@@ -1,8 +1,9 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context, } from 'aws-lambda';
 import { PromiseHandler } from './promise-handler';
 import HttpStatusCode from '../code';
+import { Logger } from '@aws-lambda-powertools/logger';
 
-export const errorHandler = () => (
+export const errorHandler = (logger?: Logger) => (
     handler: PromiseHandler<APIGatewayProxyEvent, APIGatewayProxyResult>
 ): PromiseHandler<APIGatewayProxyEvent, APIGatewayProxyResult> => async (
     event: APIGatewayProxyEvent,
@@ -11,7 +12,7 @@ export const errorHandler = () => (
     try {
         return await handler(event, context);
     } catch (e: any) {
-        console.error(JSON.stringify(e));
+        logger?.error('An error has occurred', e);
 
         return {
             body: JSON.stringify({

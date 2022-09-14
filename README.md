@@ -118,7 +118,8 @@ _(by default it generates coverage in ./coverage, the html page can be found in:
 
 ### <a name="middleware-error"></a>Error Middleware
 
-The error middleware will catch the uncaught error and transforms it to a readable response.
+The error middleware will catch the uncaught error and transforms it to a readable response.  
+In order to log the error it makes use of [@aws-lambda-powertools/logger](https://awslabs.github.io/aws-lambda-powertools-typescript/latest/core/logger/)
 
 #### Example
 
@@ -126,8 +127,11 @@ The error middleware will catch the uncaught error and transforms it to a readab
 import HttpStatusCode from '../lib/http/code';
 import Response from '../lib/http//response';
 import { errorHandler } from './error-middleware';
+import { Logger } from '@aws-lambda-powertools/logger';
 
-export const ping: APIGatewayProxyHandler = errorHandler()(async (event: APIGatewayProxyEvent, context) => {
+const logger = new Logger({serviceName: 'api'});    
+
+export const ping: APIGatewayProxyHandler = errorHandler(logger)(async (event: APIGatewayProxyEvent, context) => {
     throw new Error('Oops');
 
     return (new Response('pong')).send();
@@ -142,6 +146,16 @@ Example Response:
   "message": "Internal server error"
 }
 ```
+
+
+Log Insights query example:
+```
+fields @timestamp, @message
+| filter @message LIKE /ERROR/
+| sort @timestamp desc
+| limit 1
+```
+![Log Insights](log_insights.png "Log Insights")
 
 <p align="right">(<a href="#usage">back to usage</a>)</p>
 
